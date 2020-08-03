@@ -1,0 +1,107 @@
+<h4 style="background-color:cornflowerblue; padding: 1em;">Formularios <small> reactivos </small></h4>
+
+<form autocomplete="off" [formGroup]="formulario" (ngSubmit)="guardar()">
+    <!--a traves del formgroup el ts controla los campos -->
+    <div class="container">
+
+        <div class="form-group row">
+            <label class="col-md-1 col-form-label">Nombre</label>
+            <div class="col">
+                <input class="form-control" type="text" placeholder="Nombre" formControlName="nombre"
+                    [class.is-invalid]="apellidoNoValido">
+                <small *ngIf="nombreNoValido" class="form-text text-danger">
+                    Introduzca nombre valido
+                </small>
+                <!--en el ts tengo los campos del form y les he dado por defecto valores
+                los introduzco aqui -> formControlName="nombre"
+                es posible por esto [formGroup]="formulario" en el linea 3 -->
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-1 col-form-label">Apellido</label>
+            <div class="col">
+                <input class="form-control" type="text" placeholder="Apellido" formControlName="apellido"
+                    [class.is-invalid]="apellidoNoValido">
+                <small *ngIf="apellidoNoValido" class="form-text text-danger">
+                    Introduzca apellido valido
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-1 col-form-label">Email</label>
+            <div class="col">
+                <input type=" email" class="form-control" placeholder="Email" formControlName="email"
+                    [class.is-invalid]="emailNoValido">
+                <small *ngIf="emailNoValido" class="form-text text-danger">
+                    Introduzca email valido
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-1 col-form-label">Contraseña</label>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Contraseña" formControlName="contrasenia1"
+                    [class.is-invalid]="passNoValid1">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-1 col-form-label">Repeta contraseña</label>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Contraseña" formControlName="contrasenia2"
+                    [class.is-invalid]="comprobarContrasenias">
+
+            </div>
+        </div>
+
+        <div class="form-group row" formGroupName="direccion">
+            <!--formGroupName porque es una array de objetos-->
+            <label class="col-md-1 col-form-label">Direccion</label>
+            <div class="form-row col">
+
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="calle" formControlName="calle"
+                        [class.is-invalid]="dirNoValida">
+                    <small *ngIf="emailNoValido" class="form-text text-danger">
+                        Introduzca una direccion valida
+                    </small>
+                </div>
+
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="ciudad" formControlName="ciudad"
+                        [class.is-invalid]="ciudadNoValida">
+                    <small *ngIf="emailNoValido" class="form-text text-danger">
+                        Introduzca ciudad valida
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-1 col-form-label">Pais </label>
+            <div class="col-md-8">
+                <p>
+                    <select class="form-control" type="text" name="pais"
+                        [class.is-invalid]="pais.invalid && pais.touched" ngModel required #pais="ngModel">
+                        <option [value]="item.codigo" *ngFor="let item of lista">{{item.nombre}}</option>
+                    </select>
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group row">
+
+            <div class="col-lg-6 col-sm-6 col-xs">
+                <button type="submit" class="btn btn-warning btn-block">Enviar datos</button>
+            </div>
+
+            <div class="col-lg-6 col-sm-6 col-xs">
+                <button type="reset" class="btn btn-warning btn-block" ng-click="reset()">Resetear</button>
+            </div>
+        </div>
+
+    </div>
+</form>
